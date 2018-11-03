@@ -108,7 +108,7 @@ parse_args() {
 			crop+="trunc($crop_y/2)*2"
 
 		elif [ -f "$arg" ]; then
-			[[ "$(mimetype -L -b "$arg")" =~ ^video/ ]] \
+			[[ "$(file --mime-type -L -b "$arg")" =~ ^video/ ]] \
 				&& video="$arg" \
 				|| err "This is not a video file: ${arg##*/}"
 
@@ -331,7 +331,7 @@ check_subtitles() {
 		#  If “subs” is set, and the subtitles are in the external file,
 		#  let’s verify, that it’s in the ASS/SSA format, or a format
 		#  conversible to it.
-		ext_subtitle_type="$(mimetype -L -b -d "$subs_external_file")"
+		ext_subtitle_type="$(file --mime-type -L -b -d "$subs_external_file")"
 		case "$ext_subtitle_type" in
 			'SSA subtitles')
 				;&
@@ -606,7 +606,7 @@ determine_scene_complexity() {
 #
 set_vars() {
 	local  i  is_16_9
-	declare -g source_video_container=$(mimetype -L -b -d "$video")
+	declare -g source_video_container=$(file --mime-type -L -b -d "$video")
 
 	check_container_and_codec_set
 	[ -v max_size ] || declare -g max_size=$max_size_default

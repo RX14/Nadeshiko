@@ -66,7 +66,7 @@ tmp_luafile="$TMPDIR/${lr_script_url##*/}"
 wget -O- "$lr_script_url"  >"$tmp_luafile"
 [ -r "$tmp_luafile" ] || err 'Couldn’t download crop script.'
 
-tmp_luafile_mime=$(mimetype -b "$tmp_luafile")
+tmp_luafile_mime=$(file --mime-type -b "$tmp_luafile")
 [[ "$tmp_luafile_mime" =~ ^text/x-lua$ ]] \
 	|| err 'Downloaded file is not a Lua script.'
 

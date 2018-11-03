@@ -17,7 +17,7 @@
 set -feEuT
 shopt -s extglob
 #  Logging, error handling, messages to console and desktop.
-. "$(dirname "$0")/lib/bahelite/bahelite.sh"
+. "$(dirname "$(realpath "$0")")/lib/bahelite/bahelite.sh"
 prepare_cachedir
 start_log
 set +f
